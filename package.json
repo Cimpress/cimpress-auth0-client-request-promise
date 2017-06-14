@@ -1,0 +1,33 @@
+{
+  "name": "cimpress-auth0-client-request-promise",
+  "version": "0.1.0",
+  "description": "A reference implementation of a cimpress.io API client embodied in a wrapped version of request promise",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --recursive",
+    "test:unit": "mocha test/unit",
+    "test:service": "mocha test/service",
+    "lint": "eslint --ext .js index.js test"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.17.4",
+    "parse-cache-control": "^1.0.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "mocha": "^3.4.2",
+    "nock": "^9.0.13",
+    "rewire": "^2.5.2",
+    "sinon": "^2.3.2"
+  }
+}

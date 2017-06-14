@@ -1,3 +1,6 @@
+NOTE: Publishing currently isn't setup for this library. The work related to that is in progress and will be completed soon!
+
+
 cimpress-auth0-client-request-promise
 ======
 A module for handling generation of OAuth Bearer tokens issued by Auth0 by integrating credential management into request-promise.js.

@@ -9,10 +9,9 @@ node_js:
 before_script:
 - npm run lint
 script:
-  - git config user.email "tocco934+npm@gmail.com" && git config user.name "Dan Tocco"
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm test; fi
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git config user.email "tocco934+npm@gmail.com" && git config user.name "Dan Tocco"; fi
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm test && npm version patch -m "Updating package.json version to %s"; fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm test; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then git config user.email "tocco934+npm@gmail.com" && git config user.name "Dan Tocco"; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm test && npm version patch -m "Updating package.json version to %s"; fi
 deploy:
   provider: npm
   email: tocco934+npm@gmail.com

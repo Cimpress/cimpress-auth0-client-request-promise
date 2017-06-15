@@ -1,8 +1,7 @@
-NOTE: Publishing currently isn't setup for this library. The work related to that is in progress and will be completed soon!
 
+# cimpress-auth0-client-request-promise 
+[![Build Status](https://travis-ci.org/Cimpress-MCP/cimpress-auth0-client-request-promise.svg?branch=master)](https://travis-ci.org/Cimpress-MCP/cimpress-auth0-client-request-promise)
 
-cimpress-auth0-client-request-promise
-======
 A module for handling generation of OAuth Bearer tokens issued by Auth0 by integrating credential management into request-promise.js.
 
 This is a promise-request port from the original callback request library [here](https://github.com/Cimpress-MCP/cimpress-client-request)

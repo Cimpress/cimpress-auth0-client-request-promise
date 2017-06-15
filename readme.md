@@ -90,9 +90,32 @@ You can run tests via `npm test`.
 npm install
 ```
 
+OR 
+
+```shell
+# From Root
+yarn
+```
+
 #### Code Formatting
 
 We use eslint for formatting and mostly follow the airbnb standards
+
+## Making Changes
+
+### Contributing
+To contribute to this library fork the repo and create a pull-request back to the master branch.
+
+All changes require tests to be added or updated as part of the PR.
+
+Once Travis successfully builds your code, runs it through the linter, and runs all tests your PR will require approval before merging.
+
+### Publishing
+
+Triggering a new version of this library involves 2 manual steps (done in order). 
+
+1. A pull-request will have to be created that updated the version in package.json.
+2. A contributor/manager will have to manually create a release via github. When that happens Travis should automatically build and publish a new version of the library.
 
 ## Credits
 

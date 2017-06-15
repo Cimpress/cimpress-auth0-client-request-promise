@@ -69,7 +69,8 @@ Some other exposes methods:
 // specify a cache that will be used for the generated auth token as well as responses that have a cache-control header. By default there is no caching.
 module.exports.setCredentialCache(altcache);  
 
-//specify an alternative logger. By default uses console.log
+// specify an alternative logger. By default uses console.log.
+// The alternate logger must support: log, warn, error, and debug
 module.exports.setLogger(altLogger); 
 ```
 Note that the alternative caching method you use must return promises and have the following function definitions:

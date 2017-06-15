@@ -9,9 +9,10 @@ node_js:
 before_script:
 - npm run lint
 script:
-  - 'npm test'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo im a script; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash echo im a script; fi'
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm test && echo im a pr script; fi
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm test && bash echo im a pr script; fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm test && echo im a master script; fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm test && bash echo im a master script; fi
 deploy:
   provider: npm
   email: tocco934+npm@gmail.com

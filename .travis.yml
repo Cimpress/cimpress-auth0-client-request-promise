@@ -9,7 +9,9 @@ node_js:
 before_script:
 - npm run lint
 script:
-  - 'echo Im a script'
+  - 'npm test'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo im a script; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash echo im a script; fi'
 deploy:
   provider: npm
   email: tocco934+npm@gmail.com

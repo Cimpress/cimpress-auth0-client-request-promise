@@ -117,7 +117,3 @@ Triggering a new version of this library involves 2 manual steps (done in order)
 
 1. A pull-request will have to be created that updated the version in package.json.
 2. A contributor/manager will have to manually create a release via github. When that happens Travis should automatically build and publish a new version of the library.
-
-## Credits
-
-Thank you to Cimpress for giving the developers time to work on open-source solutions so others can benefit from our code as well!

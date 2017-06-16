@@ -1,0 +1,18 @@
+language: node_js
+cache:
+  directories:
+  - node_modules
+notifications:
+  email: false
+node_js:
+- '6.10'
+before_script:
+- npm run lint
+deploy:
+  provider: npm
+  email: tocco934+npm@gmail.com
+  api_key:
+    secure: rWAdMBPbppnnHK3LOa7eBwzGrFavcWtuM8LTQ6tEvET5zxED1yhA/FnIfxMEHHqSVSMBowNo6bH+2fKjwuhMRG8hHmeS+hNEE6ZdYv/27kBEO02ob0LpxFugHJ/uWXfRRohB1ifpKITI5QyMcqQiswUIJ1NaM3ZiwtI5dP7DEsoR0HmP8rpzjm6fEZnnJQmLT7GUffhfq4J2DdDP3MBiPFzfbUW2RKTScw0UMnzFPVrThhnv0KpBHkQtxff+A2R7x9uQNH2EPaxTh+gf/fUhSlq6e/R71V1Bxyg69ZNsI41l001qoOsDYgIf8yXorUGHwy88q6rS4WLT68bDI0JA7TCC/9diwAb/XQw6ljQM7t7ANWgqbGBPLYwf8mYCQWUELMxOqyeEqOnNjCfsv8cNXwLAjxsW2w2QNT2IWf1IgYCojYzcmjfQBaJtv+JO9drfE63atribZuqj2+R7gMU+oAr4/T5hmIxkwWvOhT2m0QW4aSTjI5AyrGtwCVJDFj2njvVYINQ4Acjc7UzWRWesH+qy8nlZ463zHY0Wml45bdK98+l6D6Ej3lnjQJIoiNrdPUMpy7P/fLoU+R1IDLxvmnbx6DRWq8Ghj2fU/HCtisrwL9RK7m7evOhnsYOOGAO/vYIcr+ZmUik26jHQsuwm80np4q9L239E/6X+lbqTvuU=
+  on:
+    tags: true
+    branch: master

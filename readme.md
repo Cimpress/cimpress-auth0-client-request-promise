@@ -1,8 +1,7 @@
-NOTE: Publishing currently isn't setup for this library. The work related to that is in progress and will be completed soon!
 
+# cimpress-auth0-client-request-promise 
+[![Build Status](https://travis-ci.org/Cimpress-MCP/cimpress-auth0-client-request-promise.svg?branch=master)](https://travis-ci.org/Cimpress-MCP/cimpress-auth0-client-request-promise)
 
-cimpress-auth0-client-request-promise
-======
 A module for handling generation of OAuth Bearer tokens issued by Auth0 by integrating credential management into request-promise.js.
 
 This is a promise-request port from the original callback request library [here](https://github.com/Cimpress-MCP/cimpress-client-request)
@@ -70,7 +69,8 @@ Some other exposes methods:
 // specify a cache that will be used for the generated auth token as well as responses that have a cache-control header. By default there is no caching.
 module.exports.setCredentialCache(altcache);  
 
-//specify an alternative logger. By default uses console.log
+// specify an alternative logger. By default uses console.log.
+// The alternate logger must support: log, warn, error, and debug
 module.exports.setLogger(altLogger); 
 ```
 Note that the alternative caching method you use must return promises and have the following function definitions:
@@ -91,10 +91,29 @@ You can run tests via `npm test`.
 npm install
 ```
 
+OR 
+
+```shell
+# From Root
+yarn
+```
+
 #### Code Formatting
 
 We use eslint for formatting and mostly follow the airbnb standards
 
-## Credits
+## Making Changes
 
-Thank you to Cimpress for giving the developers time to work on open-source solutions so others can benefit from our code as well!
+### Contributing
+To contribute to this library fork the repo and create a pull-request back to the master branch.
+
+All changes require tests to be added or updated as part of the PR.
+
+Once Travis successfully runs, including running  the linter and all tests, your PR will require approval before merging.
+
+### Publishing
+
+Triggering a new version of this library involves 2 manual steps (done in order). 
+
+1. A pull-request will have to be created that updated the version in package.json.
+2. A contributor/manager will have to manually create a release via github. When that happens Travis should automatically build and publish a new version of the library.

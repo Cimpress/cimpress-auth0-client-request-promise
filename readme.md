@@ -109,7 +109,7 @@ To contribute to this library fork the repo and create a pull-request back to th
 
 All changes require tests to be added or updated as part of the PR.
 
-Once Travis successfully builds your code, runs it through the linter, and runs all tests your PR will require approval before merging.
+Once Travis successfully runs, including running  the linter and all tests, your PR will require approval before merging.
 
 ### Publishing
 

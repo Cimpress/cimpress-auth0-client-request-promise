@@ -3,7 +3,9 @@ const _ = require('lodash');
 const auth0V2 = require('./auth0V2');
 const cache = require('./cache');
 
-let logger = console.log;
+let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
+  ? console.log
+  : () => { };
 
 const makeRequest = (options, retryLoop) => {
   const requestOptions = _.assign({}, options);

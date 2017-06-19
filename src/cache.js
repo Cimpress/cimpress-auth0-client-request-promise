@@ -10,7 +10,9 @@ const defaultCache = {
 
 let credentialCache = defaultCache;
 let keyGenFunc;
-let logger;
+let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
+  ? console.log
+  : () => { };
 
 const parseCacheControlHeader = (headers) => {
   if (headers) {

@@ -6,7 +6,9 @@ const cache = require('./cache');
 
 // TODO: get from options
 const REFRESH_TOKEN_CLIENT_ID = process.env.DEFAULT_TARGET_ID || 'QkxOvNz4fWRFT6vcq79ylcIuolFz2cwN';
-let logger = console.log;
+let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
+  ? console.log
+  : () => { };
 
 const generateAuthV1TokenCacheKey = config =>
   (config.clientId ? `${config.targetId}-${config.clientId}` : `${config.targetId}`);

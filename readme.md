@@ -14,6 +14,12 @@ This is a promise-request port from the original callback request library [here]
 npm i cimpress-auth0-client-request-promise --save
 ```
 
+OR
+
+```shell
+yarn add cimpress-auth0-client-request-promise
+```
+
 ### Usage
 
 This module exposes a few methods, but the most important one is:

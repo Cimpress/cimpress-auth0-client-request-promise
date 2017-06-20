@@ -5,15 +5,13 @@ cache:
 notifications:
   email: false
 node_js:
-- '6.10'
+  - '6.10'
 before_script:
-- npm run lint
-before_install: npm install -g npm@'>=3'
-deploy:
-  provider: npm
-  email: tocco934+npm@gmail.com
-  api_key:
-    secure: q7h8Fo5BecW73P7zT/EqBJUfQCJT6BZE1ExH4cFmyPA04neWdYJM0yd6RB9xrsnvuWAJYCZy0fxaPf58ESXr5yCWsIG56f69J66h/2piAXg2rHO3MYSsJZ3XEO2Lxduppm9oGdXJoFKFd7cdfa/V5kLbEmpWtTKzqSsi/l3XoQw+9bc7cMfkKLXSNaXWICosb/+pJk8ZkgvMg+qn9o3EDaB9EG/xbfH3Jpn+zRgz3yOT4cmMq6+EY8gvyr0zkKzXlYq/ieBVSTyBZ+8c0nS9YYcDxdsNy8X1Pzbz2gOgmszXvzlmfGjeApAxzbPBaR/evy4eWD/ea8MEE3aBsaNqkH+S1p1AAJDbDpNuHWcM8twmFnvVdGunVeUeoGafYzVQwvg9oNuInrX72yw4AsAbsxpe6E4R7yN0cRJZu50iTDdRF2qOsR3XuKRULScX+piYjHtReGiWZx99KvCWITFgEuYF3k3tF+NFvlN/hAZbjFTYj4xnsUTrvFexTcFUwaPkJE40ZR6+vkRZhU0iRV9w4mXkD2jvIC7JKM23AWq1eoLxthdvT4rOErU6w/zN0xK3m4xbidbtnE+94hXEmse8RdPKakdnwq3T0tfX4sc2eVTtzzhdrsQgAUPUcvEH3HLGiEO0pZLrKKK2kcLOCyz83CKvTCnP0a7NhyG2/umlzFg=
-  on:
-    tags: true
-    branch: master
+  - npm run lint
+before_install: 
+  - npm install -g npm@'>=3'
+after_success:
+  - npm run ci-publish || true
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"

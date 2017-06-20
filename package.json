@@ -1,6 +1,6 @@
 {
   "name": "cimpress-auth0-client-request-promise",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A reference implementation of a cimpress.io API client embodied in a wrapped version of request promise",
   "main": "index.js",
   "scripts": {

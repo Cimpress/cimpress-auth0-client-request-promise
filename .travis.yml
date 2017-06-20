@@ -8,13 +8,12 @@ node_js:
 - '6.10'
 before_script:
 - npm run lint
-before_install:
-    npm install -g npm@'>=3'
+before_install: npm install -g npm@'>=3'
 deploy:
   provider: npm
   email: tocco934+npm@gmail.com
-  api_key:
-    secure: rWAdMBPbppnnHK3LOa7eBwzGrFavcWtuM8LTQ6tEvET5zxED1yhA/FnIfxMEHHqSVSMBowNo6bH+2fKjwuhMRG8hHmeS+hNEE6ZdYv/27kBEO02ob0LpxFugHJ/uWXfRRohB1ifpKITI5QyMcqQiswUIJ1NaM3ZiwtI5dP7DEsoR0HmP8rpzjm6fEZnnJQmLT7GUffhfq4J2DdDP3MBiPFzfbUW2RKTScw0UMnzFPVrThhnv0KpBHkQtxff+A2R7x9uQNH2EPaxTh+gf/fUhSlq6e/R71V1Bxyg69ZNsI41l001qoOsDYgIf8yXorUGHwy88q6rS4WLT68bDI0JA7TCC/9diwAb/XQw6ljQM7t7ANWgqbGBPLYwf8mYCQWUELMxOqyeEqOnNjCfsv8cNXwLAjxsW2w2QNT2IWf1IgYCojYzcmjfQBaJtv+JO9drfE63atribZuqj2+R7gMU+oAr4/T5hmIxkwWvOhT2m0QW4aSTjI5AyrGtwCVJDFj2njvVYINQ4Acjc7UzWRWesH+qy8nlZ463zHY0Wml45bdK98+l6D6Ej3lnjQJIoiNrdPUMpy7P/fLoU+R1IDLxvmnbx6DRWq8Ghj2fU/HCtisrwL9RK7m7evOhnsYOOGAO/vYIcr+ZmUik26jHQsuwm80np4q9L239E/6X+lbqTvuU=
   on:
     tags: true
     branch: master
+  api_key:
+    secure: mJAOyphnFPhuXSKFvoRd9eseMG7k+PXpj+1uj/bcR7N7uE3WRlTmTif2sVVByE/Hdyrns3Wra6SZav4rauTg9pj7CZyASmVOGXv6zcz/GNS2stdUe+0hmlQqk4YDzRSIhpA0JRoHka0oXpvOB5Tl+0xCpUZLm5LbKyyAb8hsSC7KpLLFacaARxA64RAb1nvl12KwLJq0tHaWPuQ9UZ3h8dqJ4kpw0b4Oro7QBJ5/1u/0V9jP2qL84cSkSNIyeeqqRcPCkfqOUNMPJB4g2MEOayW4/QF2ExroykFI0qjBhtOIQ3CRdGKhSwg0xnMLn7axlSSk8JYOJLAIhvz9rJ3bzNwd5RdwBTagNK+0c1eHWNuliLirYFGhDuWwBb+XIBQJI2RHry3fAsyjWbg62SgqVMacVGq7gxy31pH7Z4yUtLCUkCgghbiSb4qwU9DC5rT/0H7V+6M57OrRV410pwnXv0NN8/jrlXOHfaRrMe4jK9npCM+oxnUN3OfhVPjALdxcykSp5YQgUgHVaDM7CgWCji4lVXoyqO+39vAbmQOz4FnY7II4FnJxaF6b/BoCF7eMDB+024wLP6JZurrAXZ4N7h3kxzIQWb1NsASZdBc7dAfN4jOwa9SzeF3RRku8OK2qhrpwg2dfZbQRvk2NsVtaiJPeIKFl7YqPabLKGlMl26M=

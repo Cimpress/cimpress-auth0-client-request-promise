@@ -80,7 +80,6 @@ module.exports.setCredentialCache(altcache);
 // specify an alternative logger.
 // by default the library only logs to console.log if the enviroment variable NODE_DEBUG is set equal to/includes 'cimpress-auth0-client-request-promise'
 // otherwise the library does not log
-environment var NODE_DEBUG = true
 module.exports.setLogger(altLogger); 
 ```
 Note that the alternative caching method you use must return promises and have the following function definitions:

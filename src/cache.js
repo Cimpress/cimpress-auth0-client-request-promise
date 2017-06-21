@@ -8,6 +8,7 @@ const defaultCache = {
   set: () => Promise.resolve(),
 };
 
+const defaultCachedMethods = ['GET', 'HEAD', 'OPTIONS'];
 let credentialCache = defaultCache;
 let keyGenFunc;
 let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
@@ -50,7 +51,10 @@ const checkCacheForResponse = options => keyGenFunc(options)
   .then(data => (data ? JSON.parse(data) : null))
   .catch(error => logger(`Error when checking for cached responses: ${JSON.stringify(error)}`));
 
-const saveResponseInCache = (options, res) =>
+const saveResponseInCache = (options, res) => {
+  if (!defaultCachedMethods.includes(options.method) && !options.cacheAll) {
+    return;
+  }
   parseCacheControlHeader(res.headers)
     .then((cacheControl) => {
       if (cacheControl) {
@@ -62,6 +66,7 @@ const saveResponseInCache = (options, res) =>
         });
       }
     });
+};
 
 const setLogger = (altLogger) => {
   logger = altLogger;

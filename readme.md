@@ -49,6 +49,7 @@ var options = {
   },
   keyGen: (options) => `${options.uri}-${options.method}-${options.auth.bearer}`,
   timesToRetry: 2,
+  cacheAll: true,
 };
 return request(options).then(
   (response) => {},
@@ -69,6 +70,7 @@ Here's how you should use those 5 `auth` parameters + 2 new parameters:
 | audience | The audience to send when requesting client credential grants  (https://auth0.com/docs/api-auth/grant/client-credentials). This defaults to https://api.cimpress.io/ | Y | Y |
 | keyGen | OPTIONAL A function that returns a string to be used when caching responses. Takes in the options object and must return a promise. If not specified a default function is used | N/A | N/A |
 | timesToRetry | OPTIONAL The number of times to retry when receiving a non-2XX response. Otherwise keeps trying forever | N/A | N/A |
+| cacheAll | OPTIONAL By default the library only caches GET, HEAD, and OPTIONS requests. Set this to true if you want to also cache all other request types | N/A | N/A |
 
 
 Some other exposes methods:

@@ -61,7 +61,7 @@ const saveResponseInCache = (options, res) => {
         keyGenFunc(options).then((cacheKey) => {
           credentialCache.set(
             cacheKey,
-            JSON.stringify({ res }),
+            JSON.stringify(res),
             cacheControl);
         });
       }

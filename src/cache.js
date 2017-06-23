@@ -76,10 +76,14 @@ const setCache = (altCache) => {
   credentialCache = altCache;
 };
 
-const set = (key, value, ttl) => credentialCache.set(key, value, ttl)
-  .catch((error) => {
+const set = (key, value, ttl) => {
+  try {
+    return credentialCache.set(key, value, ttl);
+  } catch (error) {
     logger(`Error when saving responses with key ${key} in cache: ${JSON.stringify(error)}`);
-  });
+  }
+  return undefined;
+};
 
 const get = key => credentialCache.get(key)
   .catch((error) => {

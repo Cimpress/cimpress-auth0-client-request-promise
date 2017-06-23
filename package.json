@@ -3,6 +3,18 @@
   "version": "0.1.6",
   "description": "A reference implementation of a cimpress.io API client embodied in a wrapped version of request promise",
   "main": "index.js",
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/Cimpress-MCP/cimpress-auth0-client-request-promise"
+  },
+  "author": "Dan Tocco <tocco934+npm@gmail.com>",
+  "contributors": [
+    {
+      "name": "Ciaran Downey",
+      "url": "https://github.com/yahehe"
+    }
+  ],
+  "license": "Apache-2.0",
   "scripts": {
     "test": "mocha test --recursive",
     "test:unit": "mocha test/unit",
@@ -10,8 +22,6 @@
     "lint": "eslint --ext .js index.js test",
     "ci-publish": "ci-publish"
   },
-  "author": "",
-  "license": "Apache-2.0",
   "dependencies": {
     "bluebird": "^3.5.0",
     "jsonwebtoken": "^7.1.9",

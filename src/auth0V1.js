@@ -3,6 +3,7 @@ const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 const request = require('request-promise');
 const cache = require('./cache');
+const re = require('./requestEmitter');
 
 // TODO: get from options
 const REFRESH_TOKEN_CLIENT_ID = process.env.DEFAULT_TARGET_ID || 'QkxOvNz4fWRFT6vcq79ylcIuolFz2cwN';
@@ -43,10 +44,14 @@ const retrieveV1TokenFromServer = (config) => {
     json: true,
   };
 
-  return request(delegationOptions).catch((error) => {
-    logger(`Error retrieving auth0v1 token from Auth0 server: ${error}`);
-    throw error;
-  });
+  re.emit(re.requestSentEvent, delegationOptions);
+  return request(delegationOptions)
+    .promise()
+    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .catch((error) => {
+      logger(`Error retrieving auth0v1 token from Auth0 server: ${error}`);
+      throw error;
+    });
 };
 
 const retrieveV1Token = (config) => {
@@ -95,10 +100,14 @@ const makeUnauthenticatedRequest = (options) => {
     auth: undefined,
   });
 
-  return request(noAuthRequestOptions).catch((error) => {
-    logger(`Request to ${noAuthRequestOptions.uri} failed due to: ${error}`);
-    return Promise.reject(error);
-  });
+  re.emit(re.requestSentEvent, noAuthRequestOptions);
+  return request(noAuthRequestOptions)
+    .promise()
+    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .catch((error) => {
+      logger(`Request to ${noAuthRequestOptions.uri} failed due to: ${error}`);
+      return Promise.reject(error);
+    });
 };
 
 const auth0v1 = (options, retryLoop, res) => {
@@ -140,7 +149,10 @@ const auth0v1 = (options, retryLoop, res) => {
             resolveWithFullResponse: true,
           });
 
+          re.emit(re.requestSentEvent, authRequestOptions);
           return request(authRequestOptions)
+            .promise()
+            .tap(response => re.emit(re.responseReceivedEvent, response))
             .catch((error) => {
               logger(`Call to ${authRequestOptions.uri} failed, retrying. Error: ${error}`);
               return retryLoop(error);

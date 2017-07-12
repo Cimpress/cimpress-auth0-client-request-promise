@@ -3,6 +3,7 @@ const request = require('request-promise');
 const Promise = require('bluebird');
 const cache = require('./src/cache');
 const passedInAuth = require('./src/passedInAuth');
+const re = require('./src/requestEmitter');
 
 // TODO: get from options? Or setup config
 let logger = console.log;
@@ -68,3 +69,5 @@ module.exports.setLogger = (l) => {
   cache.setLogger(logger);
   passedInAuth.setLogger(logger);
 };
+
+module.exports.requestEmitter = re;

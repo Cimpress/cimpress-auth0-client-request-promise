@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const request = require('request-promise');
 const cache = require('./cache');
 const auth0V1 = require('./auth0V1');
+const re = require('./requestEmitter');
 
 let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
   ? console.log
@@ -41,10 +42,14 @@ const retrieveV2TokenFromServer = (config, audience) => {
     json: true,
   };
 
-  return request(clientGrantOptions).catch((error) => {
-    logger(`Error retrieving auth0v2 token from Auth0 server: ${error}`);
-    throw error;
-  });
+  re.emit(re.requestSentEvent, clientGrantOptions);
+  return request(clientGrantOptions)
+    .promise()
+    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .catch((error) => {
+      logger(`Error retrieving auth0v2 token from Auth0 server: ${error}`);
+      throw error;
+    });
 };
 
 const retrieveV2Token = (config) => {
@@ -90,7 +95,10 @@ const auth0v2 = (options, retryLoop) => {
           resolveWithFullResponse: true,
         });
 
+      re.emit(re.requestSentEvent, requestOptions);
       return request(requestOptions)
+        .promise()
+        .tap(res => re.emit(re.responseReceivedEvent, res))
         .catch((error) => {
           logger(`Call to ${requestOptions.uri} failed, retrying. Error: ${error}`);
           return retryLoop(error);

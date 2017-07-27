@@ -102,7 +102,8 @@ const auth0v2 = (options, retryLoop) => {
         .catch((error) => {
           logger(`Call to ${requestOptions.uri} failed, retrying. Error: ${error}`);
           return retryLoop(error);
-        }).then((res) => {
+        })
+        .then((res) => {
           // If we got a 401, move on to v1auth
           if (res && res.statusCode === 401) {
             // TODO: call this in index

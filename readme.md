@@ -31,7 +31,6 @@ module.exports = (options) => { return Promise; }
 This works as a drop-in replacement for [request-promise](https://github.com/request/request-promise).  Adopting this flow is as simple as these two surgical incisions:
 
 ```js
-//var request = require('request');
 var request = require('cimpress-auth0-client-request-promise');
 ```
 
@@ -87,6 +86,55 @@ module.exports.setLogger(altLogger);
 Note that the alternative caching method you use must return promises and have the following function definitions:
 * get(key)
 * set(key, value, ttl)
+
+#### Events for Requests/Responses
+
+The library has a custom event emitter that emits on outgoing requests and incoming responses. This means that events will be emited for both requests to the specified url as well as requests made when generating an auth token, if needed.
+
+```js
+const request = require('cimpress-auth0-client-request-promise');
+const re = request.requestEmitter;
+
+// Tip: Make sure the auth token has been removed before printing values out
+re.on(re.requestSentEvent, options => console.log(options));
+re.on(re.responseReceivedEvent, response => console.log(response));
+```
+
+#### Wrapper
+
+A helpful wrapper has been added that allows you to set some values constant between request (clientId, secret, etc..) as well as setting up the cache.
+
+This wrapper returns a function with a simplified signature of:
+```js
+return (method, url, body, headers, accessToken) => {};
+```
+
+Note that the accessToken must be a bearer token.
+
+```js
+const wrapper = require('cimpress-auth0-client-request-promise/wrapper');
+const cache = require('some-caching-library');
+
+const config = {
+  audience: 'https://audience.com',  // default is same as main library if not specified
+  clientId: 'asd',
+  clientSecret: 'fgh',
+  refreshToken: 'lkj',
+  keyGen: () => 'a',  // see main library for details
+};
+
+const primedWrapper = wrapper(config, cache);
+
+// making a call
+return primedWrapper(
+  'GET', // method (required)
+  'https://1234.com',  // url (required)
+  { message: 'Hi I\'m a body!' }, // body
+  { customHeader: '5689' }, // custom headers (set to 'content-type' = 'application/json' by default)
+  'qazwsx');  // accessToken
+```
+
+You can also access the requestEmitter via wrapper.requestEmitter. See above for how to use it.
 
 ### Tests
 You might also want to look at our tests to see some examples of usage.

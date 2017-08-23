@@ -47,7 +47,7 @@ const retrieveV2TokenFromServer = (config, audience) => {
   re.emit(re.requestSentEvent, clientGrantOptions);
   return request(clientGrantOptions)
     .promise()
-    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .tap(res => re.emit(re.responseReceivedEvent, _.assign({}, res, { body: _.omit(res.body, 'access_token') })))
     .catch((error) => {
       logger(`Error retrieving auth0v2 token from Auth0 server: ${error}`);
       throw error;

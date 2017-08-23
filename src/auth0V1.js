@@ -49,7 +49,7 @@ const retrieveV1TokenFromServer = (config) => {
   re.emit(re.requestSentEvent, delegationOptions);
   return request(delegationOptions)
     .promise()
-    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .tap(res => re.emit(re.responseReceivedEvent, _.assign({}, res, { body: _.omit(res.body, 'access_token') })))
     .catch((error) => {
       logger(`Error retrieving auth0v1 token from Auth0 server: ${error}`);
       throw error;

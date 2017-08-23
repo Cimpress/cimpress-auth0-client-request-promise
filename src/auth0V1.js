@@ -42,12 +42,13 @@ const retrieveV1TokenFromServer = (config) => {
       scope: config.scope || 'openid',
     },
     json: true,
+    resolveWithFullResponse: true,
   };
 
   re.emit(re.requestSentEvent, delegationOptions);
   return request(delegationOptions)
     .promise()
-    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .tap(res => re.emit(re.responseReceivedEvent, _.assign({}, res, { body: _.omit(res.body, 'access_token') })))
     .catch((error) => {
       logger(`Error retrieving auth0v1 token from Auth0 server: ${error}`);
       throw error;
@@ -63,9 +64,9 @@ const retrieveV1Token = (config) => {
       return jwtObj;
     }
 
-    return retrieveV1TokenFromServer(config).then((body) => {
-      saveV1TokenInCache(config, body.id_token);
-      return body.id_token;
+    return retrieveV1TokenFromServer(config).then((response) => {
+      saveV1TokenInCache(config, response.body.id_token);
+      return response.body.id_token;
     });
   }).catch((err) => {
     logger(JSON.stringify(err));

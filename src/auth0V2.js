@@ -40,12 +40,13 @@ const retrieveV2TokenFromServer = (config, audience) => {
       grant_type: 'client_credentials',
     },
     json: true,
+    resolveWithFullResponse: true,
   };
 
   re.emit(re.requestSentEvent, clientGrantOptions);
   return request(clientGrantOptions)
     .promise()
-    .tap(res => re.emit(re.responseReceivedEvent, res))
+    .tap(res => re.emit(re.responseReceivedEvent, _.assign({}, res, { body: _.omit(res.body, 'access_token') })))
     .catch((error) => {
       logger(`Error retrieving auth0v2 token from Auth0 server: ${error}`);
       throw error;
@@ -62,10 +63,10 @@ const retrieveV2Token = (config) => {
       return jwtObj;
     }
 
-    return retrieveV2TokenFromServer(config, audience).then((body) => {
+    return retrieveV2TokenFromServer(config, audience).then((response) => {
       // Store the jwt keyed on the audience
-      saveV2TokenInCache(config, audience, body.access_token);
-      return body.access_token;
+      saveV2TokenInCache(config, audience, response.body.access_token);
+      return response.body.access_token;
     });
   });
 };

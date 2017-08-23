@@ -43,7 +43,6 @@ const retrieveV1TokenFromServer = (config) => {
     },
     json: true,
     resolveWithFullResponse: true,
-    simple: false,
   };
 
   re.emit(re.requestSentEvent, delegationOptions);

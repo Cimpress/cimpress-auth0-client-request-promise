@@ -41,7 +41,6 @@ const retrieveV2TokenFromServer = (config, audience) => {
     },
     json: true,
     resolveWithFullResponse: true,
-    simple: false,
   };
 
   re.emit(re.requestSentEvent, clientGrantOptions);

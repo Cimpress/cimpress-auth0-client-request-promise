@@ -42,6 +42,8 @@ const retrieveV1TokenFromServer = (config) => {
       scope: config.scope || 'openid',
     },
     json: true,
+    resolveWithFullResponse: true,
+    simple: false,
   };
 
   re.emit(re.requestSentEvent, delegationOptions);
@@ -63,9 +65,9 @@ const retrieveV1Token = (config) => {
       return jwtObj;
     }
 
-    return retrieveV1TokenFromServer(config).then((body) => {
-      saveV1TokenInCache(config, body.id_token);
-      return body.id_token;
+    return retrieveV1TokenFromServer(config).then((response) => {
+      saveV1TokenInCache(config, response.body.id_token);
+      return response.body.id_token;
     });
   }).catch((err) => {
     logger(JSON.stringify(err));

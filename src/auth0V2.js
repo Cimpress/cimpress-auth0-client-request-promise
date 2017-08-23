@@ -40,6 +40,8 @@ const retrieveV2TokenFromServer = (config, audience) => {
       grant_type: 'client_credentials',
     },
     json: true,
+    resolveWithFullResponse: true,
+    simple: false,
   };
 
   re.emit(re.requestSentEvent, clientGrantOptions);
@@ -62,10 +64,10 @@ const retrieveV2Token = (config) => {
       return jwtObj;
     }
 
-    return retrieveV2TokenFromServer(config, audience).then((body) => {
+    return retrieveV2TokenFromServer(config, audience).then((response) => {
       // Store the jwt keyed on the audience
-      saveV2TokenInCache(config, audience, body.access_token);
-      return body.access_token;
+      saveV2TokenInCache(config, audience, response.body.access_token);
+      return response.body.access_token;
     });
   });
 };

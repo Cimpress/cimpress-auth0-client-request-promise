@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 const request = require('request-promise');
 const cache = require('./cache');
 const auth0V1 = require('./auth0V1');
@@ -21,7 +21,7 @@ const retrieveV2TokenFromCache = (config, audience) => {
 
 const saveV2TokenInCache = (config, audience, token) => {
   const cacheKey = generateAuthV2TokenCacheKey(config, audience);
-  const decodedToken = jwt.decode(token);
+  const decodedToken = jwtDecode(token);
   return cache.set(cacheKey, token, decodedToken.exp - decodedToken.iat)
     .catch((error) => {
       logger(`Error saving v2 token ${cacheKey} in cache: ${JSON.stringify(error)}`);

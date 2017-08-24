@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const _ = require('lodash');
 const parseCacheControl = require('parse-cache-control');
-const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 
 const defaultCache = {
   get: () => Promise.resolve(),
@@ -30,7 +30,7 @@ const parseCacheControlHeader = (headers) => {
 const constructCacheKey = (options) => {
   try {
     if (options.auth && options.auth.bearer) {
-      const decodedToken = jwt.decode(options.auth.bearer);
+      const decodedToken = jwtDecode(options.auth.bearer);
       if (decodedToken && decodedToken.sub) {
         return Promise.resolve(`${options.method}-${options.uri}-${decodedToken.sub}`);
       }

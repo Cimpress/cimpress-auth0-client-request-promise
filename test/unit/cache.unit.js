@@ -1,7 +1,5 @@
 const rewire = require('rewire');
 const expect = require('chai').expect;
-const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
 
 const cache = rewire('../../src/cache');
 
@@ -54,11 +52,6 @@ describe('Cache constructCacheKey', () => {
     const method = 'POST';
     const uri = 'http://example.com';
     const sub = '123';
-    const jwtDecodeStub = sinon
-      .stub(jwt, 'decode')
-      .callsFake(() => ({
-        sub,
-      }));
 
     const options = {
       method,
@@ -71,7 +64,6 @@ describe('Cache constructCacheKey', () => {
     return constructCacheKey(options).then((cacheKey) => {
       expect(cacheKey).to.not.be.undefined;
       expect(cacheKey).to.equal(`${method}-${uri}-${sub}`);
-      jwtDecodeStub.restore();
     });
   });
 
@@ -79,9 +71,6 @@ describe('Cache constructCacheKey', () => {
     const bearer = 'abc';
     const method = 'POST';
     const uri = 'http://example.com';
-    const jwtDecodeStub = sinon
-      .stub(jwt, 'decode')
-      .callsFake(() => undefined);
 
     const options = {
       method,
@@ -94,7 +83,6 @@ describe('Cache constructCacheKey', () => {
     return constructCacheKey(options).then((cacheKey) => {
       expect(cacheKey).to.not.be.undefined;
       expect(cacheKey).to.equal(`${method}-${uri}`);
-      jwtDecodeStub.restore();
     });
   });
 

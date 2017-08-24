@@ -1,23 +1,21 @@
 /**
  * This test calls an API that expects a client credentials grant.
  */
-const request = require('../../index');
+let request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
-const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+const mock = require('mock-require');
 
 describe('When an auth token is passed in', () => {
-  let jwtDecodeStub;
-
   before(() => {
-    jwtDecodeStub = sinon
-      .stub(jwt, 'decode')
-      .callsFake(() => 'abcd');
+    mock('jwt-decode', () => ({
+      sub: 'abcd',
+    }));
+    request = mock.reRequire('../../index');
   });
 
   after(() => {
-    jwtDecodeStub.restore();
+    mock.stopAll();
   });
 
   afterEach(() => {

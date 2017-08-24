@@ -1,24 +1,21 @@
 /**
  * Checks the behavior of the cacheAll attribute that can be passed in when making a request
  */
-const request = require('../../index');
+let request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
-const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
+const mock = require('mock-require');
 
 describe('Setting the cacheAll field in options', () => {
-  let jwtDecodeStub;
   let oldCache;
 
   before(() => {
     oldCache = request.credentialCache;
-    jwtDecodeStub = sinon
-      .stub(jwt, 'decode')
-      .callsFake(() => ({
-        sub: 'abcd',
-      }));
+    mock('jwt-decode', () => ({
+      sub: 'abcd',
+    }));
+    request = mock.reRequire('../../index');
   });
 
   afterEach(() => {
@@ -27,7 +24,7 @@ describe('Setting the cacheAll field in options', () => {
   });
 
   after(() => {
-    jwtDecodeStub.restore();
+    mock.stopAll();
   });
 
   const config = {

@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const Promise = require('bluebird');
-const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 const request = require('request-promise');
 const cache = require('./cache');
 const re = require('./requestEmitter');
@@ -16,7 +16,7 @@ const generateAuthV1TokenCacheKey = config =>
 
 const saveV1TokenInCache = (config, token) => {
   const cacheKey = generateAuthV1TokenCacheKey(config);
-  const decodedToken = jwt.decode(token);
+  const decodedToken = jwtDecode(token);
   return cache.set(cacheKey, token, decodedToken.exp - decodedToken.iat)
     .catch(err => logger(`Error saving v1 token ${cacheKey} in cache: ${JSON.stringify(err)}`));
 };

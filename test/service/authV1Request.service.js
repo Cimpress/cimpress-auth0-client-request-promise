@@ -1,11 +1,10 @@
 /**
  * This test calls an API that expects a delegated token.
  */
-const request = require('../../index');
+let request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
-const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+const mock = require('mock-require');
 
 describe('Auth0 v1 delegation', () => {
   const refreshToken = '12345678';
@@ -13,12 +12,12 @@ describe('Auth0 v1 delegation', () => {
   const authV1Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ';
   const callingClientId = 'abcd';
   const v1AuthServer = 'https://v1auth.com';
-  let jwtDecodeStub;
 
   before(() => {
-    jwtDecodeStub = sinon
-      .stub(jwt, 'decode')
-      .callsFake(() => 'abcd');
+    mock('jwt-decode', () => ({
+      sub: 'abcd',
+    }));
+    request = mock.reRequire('../../index');
   });
 
   beforeEach(() => {
@@ -33,7 +32,7 @@ describe('Auth0 v1 delegation', () => {
   });
 
   after(() => {
-    jwtDecodeStub.restore();
+    mock.stopAll();
   });
 
   afterEach(() => {

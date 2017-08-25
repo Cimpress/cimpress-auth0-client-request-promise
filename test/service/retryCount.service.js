@@ -4,12 +4,25 @@
 const request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
+const sinon = require('sinon');
+const jwt = require('../../src/jwtDecodeObject');
 
 describe('When a call fails with a 5XX response', () => {
   const url = 'http://testing.com';
   const config = {
     bearer: '1234',
   };
+  let jwtDecodeStub;
+
+  before(() => {
+    jwtDecodeStub = sinon
+      .stub(jwt, 'decode')
+      .callsFake(() => 'abcd');
+  });
+
+  after(() => {
+    jwtDecodeStub.restore();
+  });
 
   afterEach(() => {
     nock.cleanAll();

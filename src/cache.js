@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const _ = require('lodash');
 const parseCacheControl = require('parse-cache-control');
-const jwt = require('jsonwebtoken');
+const jwt = require('./jwtDecodeObject');
 
 const defaultCache = {
   get: () => Promise.resolve(),

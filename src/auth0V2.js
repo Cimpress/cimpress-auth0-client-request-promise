@@ -1,9 +1,9 @@
 const _ = require('lodash');
-const jwt = require('jsonwebtoken');
 const request = require('request-promise');
 const cache = require('./cache');
 const auth0V1 = require('./auth0V1');
 const re = require('./requestEmitter');
+const jwt = require('./jwtDecodeObject');
 
 let logger = process.env.NODE_DEBUG && process.env.NODE_DEBUG.includes('cimpress-auth0-client-request-promise')
   ? console.log

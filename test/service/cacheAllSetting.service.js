@@ -5,8 +5,8 @@ const request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
 const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
+const jwt = require('../../src/jwtDecodeObject');
 
 describe('Setting the cacheAll field in options', () => {
   let jwtDecodeStub;

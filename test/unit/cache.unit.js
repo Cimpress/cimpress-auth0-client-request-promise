@@ -1,7 +1,7 @@
 const rewire = require('rewire');
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+const jwt = require('../../src/jwtDecodeObject');
 
 const cache = rewire('../../src/cache');
 

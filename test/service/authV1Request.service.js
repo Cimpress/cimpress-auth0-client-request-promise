@@ -5,7 +5,7 @@ const request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
 const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+const jwt = require('../../src/jwtDecodeObject');
 
 describe('Auth0 v1 delegation', () => {
   const refreshToken = '12345678';

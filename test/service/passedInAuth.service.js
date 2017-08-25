@@ -5,7 +5,7 @@ const request = require('../../index');
 const expect = require('chai').expect;
 const nock = require('nock');
 const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+const jwt = require('../../src/jwtDecodeObject');
 
 describe('When an auth token is passed in', () => {
   let jwtDecodeStub;

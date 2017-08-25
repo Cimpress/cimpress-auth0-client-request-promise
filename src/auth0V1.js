@@ -1,9 +1,9 @@
 const _ = require('lodash');
 const Promise = require('bluebird');
-const jwt = require('jsonwebtoken');
 const request = require('request-promise');
 const cache = require('./cache');
 const re = require('./requestEmitter');
+const jwt = require('./jwtDecodeObject');
 
 // TODO: get from options
 const REFRESH_TOKEN_CLIENT_ID = process.env.DEFAULT_TARGET_ID || 'QkxOvNz4fWRFT6vcq79ylcIuolFz2cwN';

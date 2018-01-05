@@ -52,7 +52,7 @@ const requestBuilder = (passedInOptions) => {
  * all calls with an OAuth Bearer token from Auth0, whether retrieved via a client credentials grant
  * flow (preferred) or via delegation.
  */
-module.exports = request.defaults(requestBuilder)
+module.exports = request.defaults(requestBuilder);
 
 module.exports.credentialCache = cache.cache;
 module.exports.defaultCache = cache.defaultCache;

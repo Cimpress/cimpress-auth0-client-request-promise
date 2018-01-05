@@ -46,9 +46,9 @@ const passedInAuth = (options, retryLoop) => {
   return auth0V2(options, retryLoop);
 };
 
-module.exports = (options, retryLoop) => passedInAuth(options, retryLoop);
+module.exports = passedInAuth;
 
 module.exports.setLogger = (altLogger) => {
   logger = altLogger;
-  auth0V2.setLogger = altLogger;
+  auth0V2.setLogger(altLogger);
 };

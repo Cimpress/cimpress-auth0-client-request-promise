@@ -22,7 +22,7 @@ const retrieveV2TokenFromCache = (config, audience) => {
 const saveV2TokenInCache = (config, audience, token) => {
   const cacheKey = generateAuthV2TokenCacheKey(config, audience);
   const decodedToken = jwt.decode(token);
-  return cache.set(cacheKey, token, decodedToken.exp - decodedToken.iat)
+  return cache.set(cacheKey, token, decodedToken.exp - decodedToken.iat - 5)
     .catch((error) => {
       logger(`Error saving v2 token ${cacheKey} in cache: ${JSON.stringify(error)}`);
     });

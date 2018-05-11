@@ -85,7 +85,7 @@ module.exports.setLogger(altLogger);
 ```
 Note that the alternative caching method you use must return promises and have the following function definitions:
 * get(key)
-* set(key, value, ttl)
+* set(key, value, ttl-in-seconds)
 
 #### Events for Requests/Responses
 

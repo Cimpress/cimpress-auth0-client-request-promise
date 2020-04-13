@@ -25,6 +25,7 @@
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-promise": "^3.5.0",
+    "minimist": "^1.2.5",
     "mocha": "^3.4.2",
     "nock": "^9.0.13",
     "rewire": "^2.5.2",
